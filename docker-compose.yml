@@ -1,0 +1,64 @@
+version: "3.4"
+
+services:
+
+  # supertokens-db:
+  #   image: 'postgres:latest'
+  #   container_name: supertokens-db
+  #   environment:
+  #     POSTGRES_USER: "${POSTGRESQL_USER}" 
+  #     POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
+  #     POSTGRES_DB: "${POSTGRESQL_DATABASE_NAME}"
+  #   ports:
+  #     - 5432:5432
+  #   networks:
+  #      - supertokens-network
+
+  supertokens-core:
+    build: core/.
+    container_name: supertokens-core
+    environment:
+      POSTGRESQL_USER: "${POSTGRESQL_USER}"
+      POSTGRESQL_PASSWORD: "${POSTGRESQL_PASSWORD}"
+      POSTGRESQL_HOST: "${POSTGRESQL_HOST}"
+      POSTGRESQL_PORT: "${POSTGRESQL_PORT}"
+      POSTGRESQL_DATABASE_NAME: "${POSTGRESQL_DATABASE_NAME}"
+      LOG_LEVEL: DEBUG
+    ports:
+      - 3567:3567
+    networks:
+      - supertokens-network
+    # depends_on:
+    #   - supertokens-db 
+    restart: unless-stopped
+    healthcheck:
+      test: >
+            bash -c 'exec 3<>/dev/tcp/127.0.0.1/3567 && echo -e "GET /hello HTTP/1.1\r\nhost: 127.0.0.1:3567\r\nConnection: close\r\n\r\n" >&3 && cat <&3 | grep "Hello"'
+      interval: 10s
+      timeout: 5s
+      retries: 5      
+
+  supertokens-backend:
+    build: backend/.
+    # image: node:18-alpine
+    container_name: supertokens-backend    
+    
+    environment:
+      SUPERTOKENS_CONNECTION_URI: http://supertokens-core:3567
+      SUPERTOKENS_APP_NAME: ${SUPERTOKENS_APP_NAME}
+      SUPERTOKENS_APP_DOMAIN: ${SUPERTOKENS_APP_DOMAIN}
+      SUPERTOKENS_WEBSITE_DOMAIN: ${SUPERTOKENS_WEBSITE_DOMAIN}
+      SUPERTOKENS_APIKEY: ${SUPERTOKENS_APIKEY}      
+    ports:
+      - 3001:3001
+    working_dir: /restBase  
+    networks:
+      - supertokens-network
+    # restart: unless-stopped
+    command: sh -c "npm i && npm run start"
+    # depends_on:
+    #   - supertokens-core
+
+networks:
+  supertokens-network:
+    driver: bridge   
