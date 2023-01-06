@@ -1,6 +1,12 @@
 import ThirdPartyEmailPassword, { Google, Github, Apple } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 import Session from "supertokens-auth-react/recipe/session";
 
+const { REACT_APP_APP_NAME, REACT_APP_WEBSITE_DOMAIN, REACT_APP_API_DOMAIN } = process.env;
+
+console.log(`REACT_APP_APP_NAME = ${REACT_APP_APP_NAME}`);
+console.log(`REACT_APP_WEBSITE_DOMAIN = ${REACT_APP_WEBSITE_DOMAIN}`);
+console.log(`REACT_APP_API_DOMAIN = ${REACT_APP_API_DOMAIN}`);
+
 export const SuperTokensConfig = {
     languageTranslations: { 
         translations: { 
@@ -31,9 +37,9 @@ export const SuperTokensConfig = {
         defaultLanguage: "pt_BR", 
     },      
     appInfo: {
-        appName: "SuperTokens Demo App",
-        apiDomain: "http://localhost:3001",
-        websiteDomain: "http://localhost:3000",
+        appName: `${REACT_APP_APP_NAME}`, //
+        apiDomain: `${REACT_APP_API_DOMAIN}`, 
+        websiteDomain: `${REACT_APP_WEBSITE_DOMAIN}`, 
     },
     // recipeList contains all the modules that you want to
     // use from SuperTokens. See the full list here: https://supertokens.com/docs/guides

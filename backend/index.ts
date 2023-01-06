@@ -3,7 +3,7 @@ import cors from "cors";
 import supertokens from "supertokens-node";
 import { verifySession } from "supertokens-node/recipe/session/framework/express";
 import { middleware, errorHandler, SessionRequest } from "supertokens-node/framework/express";
-import { SuperTokensConfig } from "./config";
+import { SuperTokensConfig, APP_PORT } from "./config";
 
 supertokens.init(SuperTokensConfig);
 
@@ -35,4 +35,4 @@ app.get("/sessioninfo", verifySession(), async (req: SessionRequest, res) => {
 // returns 401 to the client.
 app.use(errorHandler());
 
-app.listen(3001, () => console.log(`API Server listening on port 3001`));
+app.listen(APP_PORT, () => console.log(`API Server listening on port ${APP_PORT}`));

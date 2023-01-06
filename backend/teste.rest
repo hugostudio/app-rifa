@@ -1,0 +1,1 @@
+GET https://withered-glitter-1351.fly.dev/sessioninfo HTTP/1.1

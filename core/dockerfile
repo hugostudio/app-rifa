@@ -1,1 +1,10 @@
 FROM registry.supertokens.io/supertokens/supertokens-postgresql:4.2
+
+ENV SKIP_PREFLIGHT_CHECK=true
+ENV POSTGRESQL_USER=hugostudio
+ENV POSTGRESQL_PASSWORD=8e0LozuDRqsd
+ENV POSTGRESQL_HOST=ep-winter-cake-561539.cloud.neon.tech
+ENV POSTGRESQL_PORT=5432
+ENV POSTGRESQL_DATABASE_NAME=neondb
+
+EXPOSE 3567 80 443

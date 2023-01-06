@@ -2,14 +2,38 @@ import ThirdPartyEmailPassword from "supertokens-node/recipe/thirdpartyemailpass
 import Session from "supertokens-node/recipe/session";
 import { TypeInput } from "supertokens-node/types";
 import Dashboard from "supertokens-node/recipe/dashboard";
+import { SMTPService } from "supertokens-node/recipe/emailpassword/emaildelivery";
 import dotenv from 'dotenv';
 
 dotenv.config({path:"../.env"});
 const SUPERTOKENS_CONNECTION_URI = process.env.SUPERTOKENS_CONNECTION_URI as string;
-// const SUPERTOKENS_APP_NAME = process.env.SUPERTOKENS_APP_NAME as string;
-// const SUPERTOKENS_APP_DOMAIN = process.env.SUPERTOKENS_APP_DOMAIN as string;
-// const SUPERTOKENS_WEBSITE_DOMAIN = process.env.SUPERTOKENS_WEBSITE_DOMAIN as string;
-// const SUPERTOKENS_APIKEY = process.env.SUPERTOKENS_APIKEY as string;
+const SUPERTOKENS_APP_NAME = process.env.SUPERTOKENS_APP_NAME as string;
+const SUPERTOKENS_API_DOMAIN = process.env.SUPERTOKENS_API_DOMAIN as string;
+
+const SUPERTOKENS_WEBSITE_DOMAIN = process.env.SUPERTOKENS_WEBSITE_DOMAIN as string;
+const SUPERTOKENS_APIKEY = process.env.SUPERTOKENS_APIKEY as string;
+
+const EMAIL_HOST = process.env.EMAIL_HOST as string;
+const EMAIL_USER_NAME = process.env.EMAIL_USER_NAME as string;
+const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD as string;
+const EMAIL_SEND_PORT = process.env.EMAIL_SEND_PORT as string;
+const EMAIL_FROM_NAME = process.env.EMAIL_FROM_NAME as string;
+const EMAIL_FROM_EMAIL = process.env.EMAIL_FROM_EMAIL as string;
+
+export const APP_PORT = process.env.PORT;
+
+let smtpSettings = {
+    host: EMAIL_HOST,
+    authUsername: EMAIL_USER_NAME, // this is optional. In case not given, from.email will be used
+    password: EMAIL_PASSWORD,
+    port: Number(EMAIL_SEND_PORT),
+    from: {
+        name: EMAIL_FROM_NAME,
+        email: EMAIL_FROM_EMAIL,
+    },
+    secure: true
+}
+
 export const SuperTokensConfig: TypeInput = {
     supertokens: {
         // this is the location of the SuperTokens core.
@@ -17,9 +41,9 @@ export const SuperTokensConfig: TypeInput = {
         connectionURI: SUPERTOKENS_CONNECTION_URI,
     },
     appInfo: {
-        appName: "SuperTokens Demo App",
-        apiDomain: "http://localhost:3001",
-        websiteDomain: "http://localhost:3000",
+        appName: SUPERTOKENS_APP_NAME,
+        apiDomain: SUPERTOKENS_API_DOMAIN,
+        websiteDomain: SUPERTOKENS_WEBSITE_DOMAIN,
     },
     // recipeList contains all the modules that you want to
     // use from SuperTokens. See the full list here: https://supertokens.com/docs/guides
@@ -46,10 +70,13 @@ export const SuperTokensConfig: TypeInput = {
                     },
                 }),
             ],
+            emailDelivery: {
+                service: new SMTPService({smtpSettings})
+            },
         }),
         Session.init(),
         Dashboard.init({
-            apiKey: "supertokens_is_awesome",
+            apiKey: SUPERTOKENS_APIKEY,
         }),
     ],
 };
