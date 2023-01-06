@@ -1,9 +1,7 @@
-FROM node:18-alpine
+FROM nginx
 
-ADD ./build /webroot
+ENV PORT=3000
 
-WORKDIR /webroot
+WORKDIR /usr/share/nginx/html
 
-EXPOSE 3000
-
-CMD [ "npm", "run", "start" ]
+COPY ./build /usr/share/nginx/html

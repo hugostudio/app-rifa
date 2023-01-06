@@ -1,26 +1,26 @@
-# fly.toml file generated for withered-glitter-1351 on 2023-01-04T23:19:43-03:00
+# fly.toml file generated for app-rifa-backend on 2023-01-06T17:42:11-03:00
 
-app = "withered-glitter-1351"
+app = "app-rifa-backend"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
 
 [env]
   PORT = "3001"
-
   EMAIL_FROM_EMAIL = "contato@rifa.comofazer.net.br"
   EMAIL_FROM_NAME = "Equipe Técnica"
   EMAIL_HOST = "smtp.titan.email"
   EMAIL_PASSWORD = "WT6uRBPpn,V%u2|^"
   EMAIL_SEND_PORT = "465"
   EMAIL_USER_NAME = "contato@rifa.comofazer.net.br"
-  SUPERTOKENS_APIKEY = "supertokens_is_awesome"
-  SUPERTOKENS_API_DOMAIN = "https://withered-glitter-1351.fly.dev"
   SUPERTOKENS_APP_NAME = "Rifa Rifou App"
+  SUPERTOKENS_APIKEY = "supertokens_is_awesome"
+  SUPERTOKENS_API_DOMAIN = "https://app-rifa-backend.fly.dev"
   SUPERTOKENS_CONNECTION_URI = "https://withered-star-3436.fly.dev"
-  SUPERTOKENS_WEBSITE_DOMAIN = "https://localhost:3000"
+  SUPERTOKENS_WEBSITE_DOMAIN = "https://app-rifa-frontend.fly.dev"
+
 [experimental]
-  allowed_public_ports = [3001]
+  allowed_public_ports = []
   auto_rollback = true
 
 [[services]]

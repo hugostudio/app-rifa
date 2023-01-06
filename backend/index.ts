@@ -3,7 +3,15 @@ import cors from "cors";
 import supertokens from "supertokens-node";
 import { verifySession } from "supertokens-node/recipe/session/framework/express";
 import { middleware, errorHandler, SessionRequest } from "supertokens-node/framework/express";
-import { SuperTokensConfig, APP_PORT } from "./config";
+import { SuperTokensConfig } from "./config";
+import dotenv from 'dotenv';
+
+dotenv.config({path:"../.env"});
+const SUPERTOKENS_WEBSITE_DOMAIN = process.env.SUPERTOKENS_WEBSITE_DOMAIN as string;
+const PORT = process.env.PORT || 3001;
+
+console.log(`SUPERTOKENS_WEBSITE_DOMAIN : ${SUPERTOKENS_WEBSITE_DOMAIN}`);
+console.log(`PORT : ${PORT}`);
 
 supertokens.init(SuperTokensConfig);
 
@@ -11,7 +19,7 @@ const app = express();
 
 app.use(
     cors({
-        origin: "http://localhost:3000",
+        origin: SUPERTOKENS_WEBSITE_DOMAIN,
         allowedHeaders: ["content-type", ...supertokens.getAllCORSHeaders()],
         methods: ["GET", "PUT", "POST", "DELETE"],
         credentials: true,
@@ -35,4 +43,4 @@ app.get("/sessioninfo", verifySession(), async (req: SessionRequest, res) => {
 // returns 401 to the client.
 app.use(errorHandler());
 
-app.listen(APP_PORT, () => console.log(`API Server listening on port ${APP_PORT}`));
+app.listen(PORT, () => console.log(`API Server listening on port ${PORT}`));

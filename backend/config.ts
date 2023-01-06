@@ -20,8 +20,6 @@ const EMAIL_SEND_PORT = process.env.EMAIL_SEND_PORT as string;
 const EMAIL_FROM_NAME = process.env.EMAIL_FROM_NAME as string;
 const EMAIL_FROM_EMAIL = process.env.EMAIL_FROM_EMAIL as string;
 
-export const APP_PORT = process.env.PORT;
-
 let smtpSettings = {
     host: EMAIL_HOST,
     authUsername: EMAIL_USER_NAME, // this is optional. In case not given, from.email will be used

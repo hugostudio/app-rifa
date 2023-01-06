@@ -1,4 +1,4 @@
-# fly.toml file generated for app-rifa-frontend on 2023-01-06T11:42:45-03:00
+# fly.toml file generated for app-rifa-frontend on 2023-01-06T10:37:27-03:00
 
 app = "app-rifa-frontend"
 kill_signal = "SIGINT"
@@ -6,10 +6,10 @@ kill_timeout = 5
 processes = []
 
 [env]
-  PORT="80"
+  PORT = "3000"
   REACT_APP_APP_NAME="Rifa Rifou App"
-  REACT_APP_WEBSITE_DOMAIN="https://app-rifa-frontend.fly.dev"
-  REACT_APP_API_DOMAIN="https://app-rifa-backend.fly.dev"
+  REACT_APP_WEBSITE_DOMAIN="https://app-rifa-frontend.fly.dev:3000"
+  REACT_APP_API_DOMAIN="https://withered-glitter-1351.fly.dev"
 
 [experimental]
   allowed_public_ports = []
@@ -17,7 +17,7 @@ processes = []
 
 [[services]]
   http_checks = []
-  internal_port = 80
+  internal_port = 3000
   processes = ["app"]
   protocol = "tcp"
   script_checks = []
