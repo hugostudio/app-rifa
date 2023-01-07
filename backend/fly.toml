@@ -15,12 +15,12 @@ processes = []
   EMAIL_USER_NAME = "contato@rifa.comofazer.net.br"
   SUPERTOKENS_APP_NAME = "Rifa Rifou App"
   SUPERTOKENS_APIKEY = "supertokens_is_awesome"
-  SUPERTOKENS_API_DOMAIN = "https://app-rifa-backend.fly.dev"
+  SUPERTOKENS_API_DOMAIN = "https://app-rifa-backend.fly.dev:3001"
   SUPERTOKENS_CONNECTION_URI = "https://withered-star-3436.fly.dev"
   SUPERTOKENS_WEBSITE_DOMAIN = "https://app-rifa-frontend.fly.dev"
 
 [experimental]
-  allowed_public_ports = []
+  allowed_public_ports = [3001]
   auto_rollback = true
 
 [[services]]
@@ -38,15 +38,6 @@ processes = []
     force_https = true
     handlers = ["http"]
     port = 3001
-
-  [[services.ports]]
-    force_https = true
-    handlers = ["http"]
-    port = 80
-
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = 443
 
   [[services.tcp_checks]]
     grace_period = "1s"

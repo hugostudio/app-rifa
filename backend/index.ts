@@ -10,8 +10,8 @@ dotenv.config({path:"../.env"});
 const SUPERTOKENS_WEBSITE_DOMAIN = process.env.SUPERTOKENS_WEBSITE_DOMAIN as string;
 const PORT = process.env.PORT || 3001;
 
-console.log(`SUPERTOKENS_WEBSITE_DOMAIN : ${SUPERTOKENS_WEBSITE_DOMAIN}`);
-console.log(`PORT : ${PORT}`);
+// console.log(`SUPERTOKENS_WEBSITE_DOMAIN : ${SUPERTOKENS_WEBSITE_DOMAIN}`);
+// console.log(`PORT : ${PORT}`);
 
 supertokens.init(SuperTokensConfig);
 

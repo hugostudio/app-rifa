@@ -25,31 +25,31 @@ services:
       timeout: 5s
       retries: 5      
 
-  supertokens-backend:
-    build: backend/.
-    # image: node:18-alpine
-    container_name: supertokens-backend    
-    environment:
-      SUPERTOKENS_CONNECTION_URI: https://withered-star-3436.fly.dev
-      SUPERTOKENS_APP_NAME: ${SUPERTOKENS_APP_NAME}
-      SUPERTOKENS_API_DOMAIN: ${SUPERTOKENS_API_DOMAIN}
-      SUPERTOKENS_WEBSITE_DOMAIN: ${SUPERTOKENS_WEBSITE_DOMAIN}
-      SUPERTOKENS_APIKEY: ${SUPERTOKENS_APIKEY}
-      EMAIL_HOST: ${EMAIL_HOST}
-      EMAIL_USER_NAME: ${EMAIL_USER_NAME}
-      EMAIL_PASSWORD: ${EMAIL_PASSWORD}
-      EMAIL_SEND_PORT: ${EMAIL_SEND_PORT}
-      EMAIL_FROM_NAME: ${EMAIL_FROM_NAME}
-      EMAIL_FROM_EMAIL: ${EMAIL_FROM_EMAIL}
-    ports:
-      - 3001:3001
-    working_dir: /app 
-    networks:
-      - supertokens-network
-    # restart: unless-stopped
-    command: sh -c "npm i && npm run start"
-    # depends_on:
-    #   - supertokens-core
+  # supertokens-backend:
+  #   build: backend/.
+  #   # image: node:18-alpine
+  #   container_name: supertokens-backend    
+  #   environment:
+  #     SUPERTOKENS_CONNECTION_URI: https://withered-star-3436.fly.dev
+  #     SUPERTOKENS_APP_NAME: ${SUPERTOKENS_APP_NAME}
+  #     SUPERTOKENS_API_DOMAIN: ${SUPERTOKENS_API_DOMAIN}
+  #     SUPERTOKENS_WEBSITE_DOMAIN: ${SUPERTOKENS_WEBSITE_DOMAIN}
+  #     SUPERTOKENS_APIKEY: ${SUPERTOKENS_APIKEY}
+  #     EMAIL_HOST: ${EMAIL_HOST}
+  #     EMAIL_USER_NAME: ${EMAIL_USER_NAME}
+  #     EMAIL_PASSWORD: ${EMAIL_PASSWORD}
+  #     EMAIL_SEND_PORT: ${EMAIL_SEND_PORT}
+  #     EMAIL_FROM_NAME: ${EMAIL_FROM_NAME}
+  #     EMAIL_FROM_EMAIL: ${EMAIL_FROM_EMAIL}
+  #   ports:
+  #     - 3001:3001
+  #   working_dir: /app 
+  #   networks:
+  #     - supertokens-network
+  #   # restart: unless-stopped
+  #   command: sh -c "npm i && npm run start"
+  #   # depends_on:
+  #   #   - supertokens-core
 
 networks:
   supertokens-network:
